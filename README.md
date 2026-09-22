@@ -8,16 +8,19 @@ replays traces, pinpoints structured divergence, and minimizes stable failures.
 
 ## Verified results
 
-The committed output from `scripts/validate_claims.py` contains three reproducible experiments:
+The committed output from `scripts/validate_claims.py` contains three reproducible, deterministic
+experiments with injected ground truth:
 
 | Experiment | Result |
 |---|---|
-| Fresh-model replay | 240 traces replayed; 15 injected drifts identified (6.25%) |
-| Failure reduction | 26/30 stable faults reproduced; artifacts reduced 83.33% on average |
+| Fresh-model replay | 240 traces; all 15 injected drifts found; 100% precision/recall |
+| Failure reduction | 26/30 stable faults reproduced; 83.33% mean reduction; 0 false results |
 | Regression evaluation | 100 cases × 5 repeats; 82% solve rate; 2.28-point score stddev |
 
-The validation run finishes in under two seconds on the development machine because adapters are
-local deterministic fixtures. Real model and tool latency is separately captured per event.
+The validation run finishes in under two seconds because adapters are local deterministic fixtures.
+It validates ReplayScope's detection, reduction, and aggregation mechanics; it does not estimate a
+natural production drift rate or live-model quality. The JSON includes per-case records, a confusion
+matrix, source/runner hashes, and machine-checked assertions.
 
 ## Architecture
 
@@ -57,8 +60,11 @@ response = recorder.record_model_call(
     trace.id, "planner", {"messages": []}, lambda: model.complete(...), model="model-v2"
 )
 result = recorder.record_tool_call(
-    trace.id, "logs.search", {"query": response["query"]},
-    lambda: tools.search(response["query"]), tool_version="3"
+    trace.id,
+    "logs.search",
+    {"query": response["query"]},
+    lambda: tools.search(response["query"]),
+    tool_version="3",
 )
 recorder.finish(trace.id, status=TraceStatus.SUCCEEDED, workspace=Path("./workspace"))
 ```
