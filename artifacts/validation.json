@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "generated_at": "2026-09-22T23:40:01.538653+00:00",
+  "generated_at": "2026-09-22T23:46:48.530096+00:00",
   "methodology": {
     "kind": "deterministic synthetic ground-truth validation",
     "external_model_calls": false,
@@ -8,7 +8,7 @@
     "reduction_stability_runs": 2
   },
   "runtime": {
-    "git_head": "e39afc12e96ec6cda6036da6c67c9a4b0c2969c8",
+    "git_head": "bd7e741283edf7c06536856efb07e8d750bb2c0a",
     "source_tree_sha256": "52190c675ae39eef99eb45d5eab99b9cd1487a79d534c9dcfb7c2c2456707f96",
     "runner_sha256": "4c65e90385b98e715f06cdbaac3b858b250cc586849addb0cae5d720a91f92d6",
     "python": "3.13.15",
@@ -28,7 +28,7 @@
     },
     "precision": 1.0,
     "recall": 1.0,
-    "duration_seconds": 0.0987,
+    "duration_seconds": 0.0978,
     "cases": [
       {
         "case": 0,
@@ -1482,7 +1482,7 @@
     "false_positives": 0,
     "false_negatives": 0,
     "total_trials": 706,
-    "duration_seconds": 0.8469,
+    "duration_seconds": 0.8262,
     "cases": [
       {
         "case": 0,
