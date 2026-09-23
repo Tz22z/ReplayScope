@@ -8,6 +8,25 @@ replays traces, pinpoints structured divergence, and minimizes stable failures.
 
 ## Verified results
 
+### Live OpenAI Responses API
+
+The committed live benchmark used `gpt-5-mini` (resolved snapshot
+`gpt-5-mini-2025-08-07`) on 100 deterministic exact-answer cases with five independent calls per
+case. These are real API responses, not injected fixtures:
+
+| Experiment | Result |
+|---|---|
+| Live model evaluation | 500/500 calls completed and solved; 100/100 cases stable across 5 repeats |
+| Replay comparison | 400/400 fresh replays matched their recorded baseline; 0 divergences |
+| API latency and usage | 2.7513s median; 6.3255s p95; 113,299 total tokens |
+
+Every prompt, raw output, response ID, token count, latency, and ReplayScope decision is stored in
+`artifacts/live-openai-100x5.json`; the concise report is
+`artifacts/live-openai-100x5.md`. The suite measures deterministic task correctness and replay
+stability, not general model capability.
+
+### Deterministic component validation
+
 The committed output from `scripts/validate_claims.py` contains three reproducible, deterministic
 experiments with injected ground truth:
 
@@ -112,6 +131,10 @@ python -m venv .venv
 .venv/bin/pip install -e '.[dev]'
 make lint test integration
 .venv/bin/python scripts/validate_claims.py
+export OPENAI_API_KEY="your-project-key"
+.venv/bin/python scripts/live_openai_benchmark.py \
+  --cases 100 --repeats 5 --concurrency 40 \
+  --reasoning-effort low --max-output-tokens 1024
 ```
 
 ## Guarantees and boundaries

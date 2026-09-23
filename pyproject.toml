@@ -15,7 +15,8 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pytest-cov>=5", "ruff>=0.6"]
+dev = ["openai>=2,<3", "pytest>=8", "pytest-cov>=5", "ruff>=0.6"]
+live = ["openai>=2,<3"]
 
 [project.scripts]
 replayscope = "replayscope.cli:main"

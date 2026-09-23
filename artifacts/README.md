@@ -7,3 +7,8 @@ source/runner hashes, and machine-checked assertions. The Markdown file is the c
 The experiments are deterministic, synthetic ground-truth validation. They exercise the real
 replay, reduction, and regression aggregation code without external model calls; they do not claim
 that 6.25% is a naturally observed production drift rate.
+
+`live-openai-100x5.json` and `live-openai-100x5.md` are the separate live Responses API benchmark.
+The JSON contains all 500 observations and all 400 replay comparisons, including model snapshot,
+response IDs, raw outputs, token usage, latency, source/runner hashes, and assertions. The key is
+read only from `OPENAI_API_KEY` and is never written to an artifact.
